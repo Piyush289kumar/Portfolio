@@ -1,6 +1,5 @@
 import React from "react";
 import SkillCard from "./SkillCard";
-
 const skillData = [
   { technology: "PHP", value: "40" },
   { technology: "MySQL", value: "25" },
@@ -10,7 +9,6 @@ const skillData = [
   { technology: "MongoDB", value: "20" },
   { technology: "Corel Draw", value: "35" },
 ];
-
 function SkillSection() {
   return (
     <div className="mb-20 lg:mb-36">
@@ -27,5 +25,4 @@ function SkillSection() {
     </div>
   );
 }
-
 export default SkillSection;

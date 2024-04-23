@@ -4,6 +4,7 @@ import {
   HomeCard,
   PorfolioCard,
   SkillSection,
+  ProjectSection,
 } from "../components/index.js";
 
 function Home() {
@@ -13,6 +14,7 @@ function Home() {
       <HomeCard />
       <AboutCard />
       <SkillSection />
+      <ProjectSection />
     </div>
   );
 }
