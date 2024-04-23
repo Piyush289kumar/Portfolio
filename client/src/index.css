@@ -31,3 +31,12 @@ body {
   border-radius: 15px;
   background: linear-gradient(to right, violet, yellow);
 }
+
+.scrollBar::-webkit-scrollbar {
+  width: 5px;
+  background: transparent;
+}
+.scrollBar::-webkit-scrollbar-thumb {
+  background: rgb(255, 255, 0);
+  border-radius: 20px;
+}
