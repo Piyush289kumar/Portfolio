@@ -1,3 +1,22 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+  background-image: url("./assets/images/bg.png");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+}
+
+.portfolioCard {
+  background-color: rgba(128, 128, 128, 0.173);
+}
+
+.gradientText {
+  background: linear-gradient(white, rgb(134, 78, 173));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
