@@ -12,7 +12,6 @@ function ProjectCard() {
             alt="{projectTitle}"
             className="lg:h-48 h-[200px] w-full object-cover lg:object-center"
           />
-
           <div className="p-4 flex flex-col lg:gap-3">
             <h2 className="tracking-widest font-semibold text-2xl text-white">
               Project Title
@@ -23,10 +22,10 @@ function ProjectCard() {
             </h1>
             <div className="flex items-center justify-between mt-2 pt-2 border-2 border-transparent border-t-gray-400">
               <a href="#">
-                <AiFillGithub className="text-white font-bold inline-flex items-center text-lg md:text-xl md:mb-2 lg:mb-0 hover:text-sky-300 cursor-pointer" />
+                <AiFillGithub className="text-white font-bold inline-flex items-center text-2xl md:text-3xl md:mb-2 lg:mb-0 hover:text-sky-300 cursor-pointer" />
               </a>
               <a href="#">
-                <RiSignalTowerFill className="text-white font-bold inline-flex items-center text-lg md:text-xl md:mb-2 lg:mb-0 hover:text-sky-300 cursor-pointer" />
+                <RiSignalTowerFill className="text-white font-bold inline-flex items-center text-2xl md:text-3xl md:mb-2 lg:mb-0 hover:text-sky-300 cursor-pointer" />
               </a>
             </div>
           </div>
@@ -35,5 +34,4 @@ function ProjectCard() {
     </div>
   );
 }
-
 export default ProjectCard;
