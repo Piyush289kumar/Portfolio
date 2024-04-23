@@ -4,6 +4,44 @@ import { HiArrowSmLeft } from "react-icons/hi";
 import { HiArrowSmRight } from "react-icons/hi";
 import { useRef } from "react";
 function ProjectSection() {
+  const projectData = [
+    {
+      title: "Project One",
+      src: "/src/assets/images/project.png",
+      GitHub: "GitHub",
+      LiveLink: "Live Link",
+    },
+    {
+      title: "Project Two",
+      src: "/src/assets/images/project.png",
+      GitHub: "GitHub",
+      LiveLink: "Live Link",
+    },
+    {
+      title: "Project Three",
+      src: "/src/assets/images/project.png",
+      GitHub: "GitHub",
+      LiveLink: "Live Link",
+    },
+    {
+      title: "Project Four",
+      src: "/src/assets/images/project.png",
+      GitHub: "GitHub",
+      LiveLink: "Live Link",
+    },
+    {
+      title: "Project Five",
+      src: "/src/assets/images/project.png",
+      GitHub: "GitHub",
+      LiveLink: "Live Link",
+    },
+    {
+      title: "Project Sex",
+      src: "/src/assets/images/project.png",
+      GitHub: "GitHub",
+      LiveLink: "Live Link",
+    },
+  ];
   const scrollRef = useRef(null);
   const scrollRight = () => {
     scrollRef.current.scrollLeft += 500;
@@ -20,15 +58,14 @@ function ProjectSection() {
         ref={scrollRef}
         className="flex overflow-x-scroll gap-8 lg:p-3 scrollHide"
       >
-        <ProjectCard />
-        <ProjectCard />
-        <ProjectCard />
-        <ProjectCard />
-        <ProjectCard />
-        <ProjectCard />
-        <ProjectCard />
-        <ProjectCard />
-        <ProjectCard />
+        {projectData.map((project, idx) => (
+          <ProjectCard
+            title={project.title}
+            src={project.src}
+            GitHub={project.GitHub}
+            LiveLink={project.LiveLink}
+          />
+        ))}
       </div>
       <div className="flex justify-center items-center gap-3 mt-2 select-none">
         <HiArrowSmLeft
