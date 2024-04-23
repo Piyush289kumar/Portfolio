@@ -36,7 +36,7 @@ function ProjectSection() {
       LiveLink: "Live Link",
     },
     {
-      title: "Project Sex",
+      title: "Project Six",
       src: "/src/assets/images/project.png",
       GitHub: "GitHub",
       LiveLink: "Live Link",
