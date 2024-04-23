@@ -1,7 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+* {
+  scroll-behavior: smooth;
+}
 body {
   background-image: url("./assets/images/bg.png");
   background-repeat: no-repeat;
@@ -9,29 +11,24 @@ body {
   background-position: center;
   background-size: cover;
 }
-
 .portfolioCard {
   background-color: rgba(128, 128, 128, 0.173);
 }
-
 .gradientText {
   background: linear-gradient(white, rgb(134, 78, 173));
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-
 .progressBar {
   border-radius: 15px;
   border: 1px solid gray;
   background-color: transparent;
 }
-
 .progressBarVal {
   border-radius: 15px;
   background: linear-gradient(to right, violet, yellow);
 }
-
 .scrollBar::-webkit-scrollbar {
   width: 5px;
   background: transparent;
