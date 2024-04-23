@@ -1,5 +1,10 @@
 import React from "react";
-import { AboutCard, HomeCard, PorfolioCard } from "../components/index.js";
+import {
+  AboutCard,
+  HomeCard,
+  PorfolioCard,
+  SkillSection,
+} from "../components/index.js";
 
 function Home() {
   return (
@@ -7,6 +12,7 @@ function Home() {
       <PorfolioCard />
       <HomeCard />
       <AboutCard />
+      <SkillSection />
     </div>
   );
 }

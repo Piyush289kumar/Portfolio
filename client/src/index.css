@@ -20,3 +20,14 @@ body {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
+.progressBar {
+  border-radius: 15px;
+  border: 1px solid gray;
+  background-color: transparent;
+}
+
+.progressBarVal {
+  border-radius: 15px;
+  background: linear-gradient(to right, violet, yellow);
+}
