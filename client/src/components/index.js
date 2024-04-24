@@ -1,4 +1,5 @@
 import AboutCard from "./AboutCard";
+import ContactSection from "./ContactSection";
 import HomeCard from "./HomeCard";
 import PorfolioCard from "./PorfolioCard";
 import ProjectCard from "./ProjectCard";
@@ -14,4 +15,5 @@ export {
   SkillSection,
   ProjectSection,
   ProjectCard,
+  ContactSection,
 };
