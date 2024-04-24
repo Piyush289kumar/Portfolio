@@ -50,7 +50,7 @@ function ProjectSection() {
     scrollRef.current.scrollLeft -= 500;
   };
   return (
-    <div className="mb-20 lg:mb-36">
+    <div data-aos="fade-left" className="mb-20 lg:mb-36">
       <h1 className="text-5xl lg:text-7xl gradientText mb-10">
         My Recent Project
       </h1>

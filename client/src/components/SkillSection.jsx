@@ -11,7 +11,7 @@ const skillData = [
 ];
 function SkillSection() {
   return (
-    <div className="mb-20 lg:mb-36">
+    <div data-aos="zoom-in-up" className="mb-20 lg:mb-36">
       <h1 className="text-5xl lg:text-7xl gradientText mb-10">My Skills</h1>
       <div className="h-[300px] overflow-y-scroll select-none scrollBar cursor-pointer">
         {skillData.map((skill, idx) => (

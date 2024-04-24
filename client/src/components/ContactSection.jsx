@@ -2,7 +2,10 @@ import React from "react";
 import { AiFillGithub, AiFillLinkedin } from "react-icons/ai";
 function ContactSection() {
   return (
-    <div className="flex flex-col lg:flex-row lg:items-center mb-20 lg:mb-36">
+    <div
+      data-aos="zoom-in-up"
+      className="flex flex-col lg:flex-row lg:items-center mb-20 lg:mb-36"
+    >
       <span className="uppercase text-3xl lg:text-2xl font-bold gradientText mb-8 lg:mb-0 rotate-0 lg:-rotate-90">
         Get Started!
       </span>

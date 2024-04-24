@@ -4,7 +4,7 @@ import avatar from "../assets/images/avatar.png";
 function HomeCard() {
   return (
     <div className="flex flex-col lg:flex-row gap-5 lg:gap-0 justify-between items-center mb-20 lg:mb-36">
-      <div className="flex flex-col gap-5 lg:w-[50%]">
+      <div data-aos="fade-up-right" className="flex flex-col gap-5 lg:w-[50%]">
         <h1 className="text-5xl lg:text-7xl mb-10 gradientText">Hey!</h1>
         <p className="text-gray-300 text-xl lg:text-2xl text-justify">
           Thank you for allowing me to introduce myself. My name is
@@ -23,7 +23,7 @@ function HomeCard() {
           my career. Let's connect and create something amazing together!
         </p>
       </div>
-      <div>
+      <div data-aos="fade-up-left">
         <img
           src={avatar}
           alt="Profile Picture"
