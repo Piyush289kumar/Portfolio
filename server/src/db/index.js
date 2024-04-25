@@ -6,7 +6,7 @@ let uri =
 
 const connectDB = async () => {
 	try {
-		const connectionInstance = await mongoose.connect(`uri/portfolio_db`);
+		const connectionInstance = await mongoose.connect(`${uri}/portfolio_db`);
 		console.log(
 			`MongoDB Connected | DB Host : ${connectionInstance.connection.host}`
 		);
@@ -15,3 +15,5 @@ const connectDB = async () => {
 		new ApiError(401, "Database Connection Falied", (error = error));
 	}
 };
+
+export { connectDB };
