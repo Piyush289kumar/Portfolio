@@ -20,6 +20,9 @@ const projectSchema = new Schema(
 		hostedUrl: {
 			type: String,
 		},
+		publicId: {
+			type: String,
+		},
 		deleteToken: {
 			type: String,
 		},
