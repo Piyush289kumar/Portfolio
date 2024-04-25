@@ -31,6 +31,11 @@ const userSchema = new Schema(
 		refreshToken: {
 			type: String,
 		},
+		accessToken: {
+			type: String,
+		},
 	},
 	{ timestamps: true }
 );
+
+export const User = model("User", userSchema);
