@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 import { ApiError } from "../utils/index.js";
 
 let uri =
-	"mongodb+srv://piyushraikwar289:piyush289@cluster0.5lpcsrr.mongodb.net/";
+	"mongodb+srv://piyushraikwar289:piyush289@cluster0.5lpcsrr.mongodb.net";
 
 const connectDB = async () => {
 	try {
