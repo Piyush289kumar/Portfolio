@@ -1,9 +1,9 @@
 import Jwt from "jsonwebtoken";
-import { asycHandler } from "../utils";
-import { ApiError } from "../utils";
-import { ApiResponse } from "../utils";
+import { asycHandler } from "../utils/index.js";
+import { ApiError } from "../utils/index.js";
+import { ApiResponse } from "../utils/index.js";
 import mongoose from "mongoose";
-import { User } from "../models/User.model";
+import { User } from "../models/User.model.js";
 const cookieOption = {
 	httpOnly: true,
 	secure: true,
@@ -11,6 +11,7 @@ const cookieOption = {
 
 const signup = asycHandler(async (req, res) => {
 	const { fullname, username, email, password } = req.body;
+
 	if (
 		[fullname, username, email, password].some(
 			(field) => field?.trim() === ""
