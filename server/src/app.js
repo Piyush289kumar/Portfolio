@@ -10,4 +10,11 @@ app.use(express.urlencoded({ extended: true, limit: fileLimit }));
 app.use(express.static("public"));
 app.use(cors());
 app.use(cookieParser());
+
+// Import Route
+import router from "./routes/user.route.js";
+
+// Roter Declearation
+app.use("/api/v1/", router);
+
 export { app };
