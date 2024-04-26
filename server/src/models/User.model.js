@@ -25,9 +25,6 @@ const userSchema = new Schema(
 			type: String,
 			required: true,
 		},
-		avatar: {
-			type: String,
-		},
 		refreshToken: {
 			type: String,
 		},
