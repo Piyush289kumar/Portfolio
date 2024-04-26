@@ -1,10 +1,10 @@
-import express from "express";
+import { app } from "./app.js";
 import dotenv from "dotenv";
 import { connectDB } from "./db/index.js";
+
 dotenv.config({ path: "./.env" });
 
 const PORT = process.env.PORT || 3001;
-const app = express();
 
 connectDB()
 	.then(() => {
@@ -12,17 +12,8 @@ connectDB()
 			console.log(`Error: ${error}`);
 			throw error;
 		});
-
-		app.use(express.json());
-
-		app.get("/", (req, res) => {
-			res.status(200).json({
-				msg: "Server is Live",
-			});
-		});
-
 		app.listen(PORT, () => {
-			console.log(`Server is Running on PORT : ${PORT}`);
+			console.log(`⚙️ Server is running at PORT: ${PORT}`);
 		});
 	})
 	.catch((err) => {
