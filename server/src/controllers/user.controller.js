@@ -114,4 +114,4 @@ const logout = asycHandler(async (req, res) => {
 		throw new ApiError(500, "Something wrong while logout account");
 	}
 });
-export { signup, signin };
+export { signup, signin, logout };
