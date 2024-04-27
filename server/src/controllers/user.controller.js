@@ -8,7 +8,6 @@ const cookieOption = {
 	httpOnly: true,
 	secure: true,
 };
-
 const generateAccessAndRefreshToken = async (userId) => {
 	try {
 		const fetchUserData = User.findById(userId);
@@ -24,10 +23,8 @@ const generateAccessAndRefreshToken = async (userId) => {
 		);
 	}
 };
-
 const signup = asycHandler(async (req, res) => {
 	const { fullname, username, email, password } = req.body;
-
 	if (
 		[fullname, username, email, password].some(
 			(field) => field?.trim() === ""
@@ -35,20 +32,16 @@ const signup = asycHandler(async (req, res) => {
 	) {
 		throw new ApiError(400, "All Field is required");
 	}
-
 	const userExited = await User.findOne({ $or: [{ email }] });
-
 	if (userExited) {
 		throw new ApiError(409, "User with Email is already Exited");
 	}
-
 	const userCreateQuery = await User.create({
 		username,
 		fullname,
 		email,
 		password,
 	});
-
 	const userCreateQueryRes = await User.findById(userCreateQuery._id).select(
 		"-password -refreshToken"
 	);
@@ -65,7 +58,6 @@ const signup = asycHandler(async (req, res) => {
 			)
 		);
 });
-
 const signin = asycHandler(async (req, res) => {
 	try {
 		const { email, username, password } = req.body;
@@ -76,23 +68,21 @@ const signin = asycHandler(async (req, res) => {
 		if (!user) {
 			throw new ApiError(404, "Account Not Found...!");
 		}
-
 		const isPasswordCorrect = await user.isPasswordCorrect(password);
 		if (!isPasswordCorrect) {
 			throw new ApiError(401, "Invalid User Credentials");
 		}
-
 		const { accessToken, refreshToken } = generateAccessAndRefreshToken(
 			user._id
 		);
-
 		const loggedUser = await User.findById(user._id).select(
 			"-password",
 			"-refreshToken"
 		);
-
 		return res
 			.status(200)
+			.cookie("accessToken", accessToken, cookieOption)
+			.cookie("refreshToken", refreshToken, cookieOption)
 			.json(
 				new ApiResponse(
 					200,
@@ -104,5 +94,24 @@ const signin = asycHandler(async (req, res) => {
 		throw new ApiError(500, "Something wrong while login account.");
 	}
 });
-
-export { signup };
+const logout = asycHandler(async (req, res) => {
+	try {
+		await User.findByIdAndUpdate(
+			req.user._id,
+			{
+				$unset: {
+					refreshToken: "1",
+				},
+			},
+			{ new: true }
+		);
+		return res
+			.status(200)
+			.clearCookie("accessToken", cookieOption)
+			.clearCookie("refreshToken", refreshToken)
+			.json(new ApiResponse(200, {}, "User Logged Out"));
+	} catch (error) {
+		throw new ApiError(500, "Something wrong while logout account");
+	}
+});
+export { signup, signin };
