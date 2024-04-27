@@ -9,6 +9,22 @@ const cookieOption = {
 	secure: true,
 };
 
+const generateAccessAndRefreshToken = async (userId) => {
+	try {
+		const fetchUserData = User.findById(userId);
+		const accessToken = fetchUserData.generateAccessToken();
+		const refreshToken = fetchUserData.generateRefreshToken();
+		fetchUserData.refreshToken = refreshToken;
+		await fetchUserData.save({ validateBeforeSave: false });
+		return { accessToken, refreshToken };
+	} catch (error) {
+		throw new ApiError(
+			500,
+			"Something went wrong while generating access and refresh token"
+		);
+	}
+};
+
 const signup = asycHandler(async (req, res) => {
 	const { fullname, username, email, password } = req.body;
 
@@ -53,14 +69,37 @@ const signup = asycHandler(async (req, res) => {
 const signin = asycHandler(async (req, res) => {
 	try {
 		const { email, username, password } = req.body;
-		if (!email && !username) {
+		if (!email && !username && !password) {
 			throw new ApiError(400, "Email or Username is Required");
 		}
 		const user = await User.findOne({ $or: [{ email }, { username }] });
 		if (!user) {
 			throw new ApiError(404, "Account Not Found...!");
 		}
-		
+
+		const isPasswordCorrect = await user.isPasswordCorrect(password);
+		if (!isPasswordCorrect) {
+			throw new ApiError(401, "Invalid User Credentials");
+		}
+
+		const { accessToken, refreshToken } = generateAccessAndRefreshToken(
+			user._id
+		);
+
+		const loggedUser = await User.findById(user._id).select(
+			"-password",
+			"-refreshToken"
+		);
+
+		return res
+			.status(200)
+			.json(
+				new ApiResponse(
+					200,
+					{ user: loggedUser, accessToken, refreshToken },
+					"User Logged in Successfully"
+				)
+			);
 	} catch (error) {
 		throw new ApiError(500, "Something wrong while login account.");
 	}
