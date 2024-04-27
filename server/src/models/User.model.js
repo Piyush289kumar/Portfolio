@@ -30,9 +30,6 @@ const userSchema = new Schema(
 		refreshToken: {
 			type: String,
 		},
-		accessToken: {
-			type: String,
-		},
 	},
 	{ timestamps: true }
 );
@@ -45,8 +42,34 @@ userSchema.pre("save", async function (next) {
 	return next();
 });
 
-const isPasswordCorrect = ()=>{
-	
-}
+userSchema.methods.isPasswordCorrect = async function (password) {
+	return await bcrypt.compare(password, this.password);
+};
+
+userSchema.methods.generateAccessToken = async function () {
+	return jwt.sign(
+		{
+			_id: this._id,
+			email: this.email,
+			username: this.username,
+		},
+		process.env.ACCESS_TOKEN_SECRET,
+		{
+			expiresIn: process.env.ACCESS_TOKEN_EXPIRY,
+		}
+	);
+};
+
+userSchema.methods.generateRefreshToken = async function () {
+	return jwt.sign(
+		{
+			_id: this._id,
+		},
+		process.env.REFRESH_TOKEN_SECRET,
+		{
+			expiresIn: process.env.REFRESH_TOKEN_EXPIRY,
+		}
+	);
+};
 
 export const User = model("User", userSchema);
