@@ -50,4 +50,20 @@ const signup = asycHandler(async (req, res) => {
 		);
 });
 
+const signin = asycHandler(async (req, res) => {
+	try {
+		const { email, username, password } = req.body;
+		if (!email && !username) {
+			throw new ApiError(400, "Email or Username is Required");
+		}
+		const user = await User.findOne({ $or: [{ email }, { username }] });
+		if (!user) {
+			throw new ApiError(404, "Account Not Found...!");
+		}
+		
+	} catch (error) {
+		throw new ApiError(500, "Something wrong while login account.");
+	}
+});
+
 export { signup };

@@ -45,4 +45,8 @@ userSchema.pre("save", async function (next) {
 	return next();
 });
 
+const isPasswordCorrect = ()=>{
+	
+}
+
 export const User = model("User", userSchema);
