@@ -117,7 +117,7 @@ const logout = asycHandler(async (req, res) => {
 
 const getUserDetail = asycHandler(async (req, res) => {
 	try {
-		const user = await User.findOne();
+		const user = await User.findOne().select("-password -email -refreshToken");
 		if (!user) {
 			throw new ApiError(404, "User not found..");
 		}
