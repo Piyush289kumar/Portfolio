@@ -115,11 +115,17 @@ const logout = asycHandler(async (req, res) => {
 	}
 });
 
-const getUserDetail = asycHandler(async (req,res)=>{
+const getUserDetail = asycHandler(async (req, res) => {
 	try {
-		
+		const user = await User.findOne();
+		if (!user) {
+			throw new ApiError(404, "User not found..");
+		}
+		return res
+			.status(200)
+			.json(new ApiResponse(200, user, "User Data Fetch"));
 	} catch (error) {
-		throw new ApiError(500, "Something went wrong while Fetch user data")
+		throw new ApiError(500, "Something went wrong while Fetch user data");
 	}
-})
+});
 export { signup, signin, logout };
