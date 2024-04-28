@@ -114,4 +114,12 @@ const logout = asycHandler(async (req, res) => {
 		throw new ApiError(500, "Something wrong while logout account");
 	}
 });
+
+const getUserDetail = asycHandler(async (req,res)=>{
+	try {
+		
+	} catch (error) {
+		throw new ApiError(500, "Something went wrong while Fetch user data")
+	}
+})
 export { signup, signin, logout };
