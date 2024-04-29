@@ -139,6 +139,18 @@ const getUserDetail = asycHandler(async (_, res) => {
 });
 const getAdminUser = asycHandler(async (req, res) => {
 	try {
+		const { userId } = req.user?._id;
+		if (userId) {
+			throw new ApiError(404, false, "User Id Missing");
+		}
+		const fetchUserData = await User.findById(
+			userId,
+			"-password -email -refreshToken"
+		);
+		if (!fetchUserData) {
+			throw new ApiError(404, false, "User not found..");
+		}
+		return res.status(200).json(new ApiResponse(200, true, fetchUserData));
 	} catch (error) {
 		new ApiError(
 			500,
