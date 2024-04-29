@@ -137,7 +137,7 @@ const getUserDetail = asycHandler(async (_, res) => {
 		);
 	}
 });
-const getAdminUser = asycHandler(async (req, res) => {
+const getAuthUser = asycHandler(async (req, res) => {
 	try {
 		const { userId } = req.user?._id;
 		if (userId) {
@@ -159,4 +159,4 @@ const getAdminUser = asycHandler(async (req, res) => {
 		);
 	}
 });
-export { signup, signin, logout };
+export { signup, signin, logout, getUserDetail, getAuthUser };
