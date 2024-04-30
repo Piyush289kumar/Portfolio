@@ -27,6 +27,7 @@ const generateAccessAndRefreshToken = async (userId) => {
 };
 const signup = asycHandler(async (req, res) => {
 	const { fullname, username, email, password } = req.body;
+
 	if (
 		[fullname, username, email, password].some(
 			(field) => field?.trim() === ""
@@ -39,16 +40,21 @@ const signup = asycHandler(async (req, res) => {
 		throw new ApiError(409, false, "User with Email is already Exited");
 	}
 	const userCreateQuery = await User.create({
-		username,
 		fullname,
+		username,
 		email,
 		password,
 	});
 	const userCreateQueryRes = await User.findById(userCreateQuery._id).select(
 		"-password -refreshToken"
 	);
-	if (userCreateQueryRes) {
-		throw new ApiError(500, false, "Something went wrong Sign Up Process");
+
+	if (!userCreateQueryRes) {
+		throw new ApiError(
+			500,
+			false,
+			"Something went wrong Sign Up Process - userCreateQueryRes"
+		);
 	}
 	return res
 		.status(201)
