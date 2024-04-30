@@ -17,6 +17,7 @@ import {
 	addProject,
 	getProjects,
 	removeProject,
+	updateProject,
 } from "../controllers/project.controller.js";
 
 const router = Router();
@@ -36,6 +37,7 @@ router.route("/remove-skill/:skill_id").delete(removeSkill);
 // Project Route
 router.route("/get-project").get(getProjects);
 router.route("/add-project").post(verifyJWT, addProject);
+router.route("/update-project/:project_id").put(verifyJWT, updateProject);
 router.route("/delete-project/:project_id").delete(verifyJWT, removeProject);
 
 export default router;

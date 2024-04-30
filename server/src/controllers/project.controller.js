@@ -75,6 +75,52 @@ const addProject = asycHandler(async (req, res) => {
 	}
 });
 
+const updateProject = asycHandler(async (req, res) => {
+	try {
+		const { project_id } = req.params;
+		const updateProjectData = req.body;
+
+		if (!updateProjectData) {
+			throw new ApiError(
+				404,
+				false,
+				"Data is not found for updating project."
+			);
+		}
+
+		const fetchOldProject = await Project.findOne({ _id: project_id });
+		if (!fetchOldProject) {
+			throw new ApiError(404, false, {}, "Project is not found.");
+		}
+
+		if (updateProjectData.img) {
+			fetchOldProject.img = updateProjectData.img;
+		}
+
+		for (const key in updateProjectData) {
+			if (key !== "img") {
+				fetchOldProject[key] = updateProjectData[key];
+			}
+		}
+
+		const updateProjectInDB = await fetchOldProject.save();
+
+		if (!updateProjectInDB) {
+			throw new ApiError(401, false, "Project is not update in Database");
+		}
+
+		return res
+			.status(200)
+			.json(new ApiResponse(200, true, {}, "Project is Updated."));
+	} catch (error) {
+		throw new ApiError(
+			500,
+			false,
+			error.message || "Something went wrong while Updating Project."
+		);
+	}
+});
+
 const removeProject = asycHandler(async (req, res) => {
 	try {
 		const { project_id } = req.params;
@@ -101,4 +147,4 @@ const removeProject = asycHandler(async (req, res) => {
 	}
 });
 
-export { getProjects, addProject, removeProject };
+export { getProjects, addProject, updateProject, removeProject };
