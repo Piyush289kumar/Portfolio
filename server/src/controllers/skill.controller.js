@@ -6,9 +6,11 @@ const getSkills = asycHandler(async (_, res) => {
 		if (!skills) {
 			return res
 				.status(404)
-				.json(new ApiResponse(404, false, "Skill Not Found"));
+				.json(new ApiResponse(404, false, {}, "Skill Not Found"));
 		}
-		return res.status(200).json(new ApiResponse(200, true, skills));
+		return res
+			.status(200)
+			.json(new ApiResponse(200, true, skills, "Skill Fetch"));
 	} catch (error) {
 		throw new ApiError(
 			500,
@@ -27,17 +29,17 @@ const addSkill = asycHandler(async (req, res) => {
 		if (!createSkill) {
 			return res
 				.status(411)
-				.json(new ApiResponse(411, true, "Skill is Not Created.."));
+				.json(new ApiResponse(411, true, {}, "Skill is Not Created.."));
 		}
 		const saveSkill = await createSkill.save();
 		if (!saveSkill) {
 			return res
 				.status(411)
-				.json(new ApiResponse(411, true, "Skill is not Save..."));
+				.json(new ApiResponse(411, true, {}, "Skill is not Save..."));
 		}
 		return res
 			.status(200)
-			.json(new ApiResponse(201, true, "Skill is added"));
+			.json(new ApiResponse(201, true, {}, "Skill is added"));
 	} catch (error) {
 		throw new ApiError(
 			500,
@@ -56,11 +58,13 @@ const removeSkill = asycHandler(async (req, res) => {
 		if (!removeSkill) {
 			return res
 				.status(411)
-				.json(new ApiResponse(401, false, "Skill is not Remove."));
+				.json(new ApiResponse(401, false, {}, "Skill is not Remove."));
 		}
 		return res
 			.status(200)
-			.json(new ApiResponse(200, true, "Skill is removed successfully."));
+			.json(
+				new ApiResponse(200, true, {}, "Skill is removed successfully.")
+			);
 	} catch (error) {
 		throw new ApiError(
 			500,
