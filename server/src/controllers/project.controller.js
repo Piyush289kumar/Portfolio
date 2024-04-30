@@ -75,4 +75,30 @@ const addProject = asycHandler(async (req, res) => {
 	}
 });
 
-export { getProjects, addProject };
+const removeProject = asycHandler(async (req, res) => {
+	try {
+		const { project_id } = req.params;
+
+		if (!project_id) {
+			throw new ApiError(404, false, "Project Id is not found.");
+		}
+
+		const removeProjectInDB = await Project.findOneAndDelete(project_id);
+
+		if (!removeProjectInDB) {
+			throw new ApiError(411, false, "Unable to Remove Project.");
+		}
+
+		return res
+			.status(200)
+			.json(new ApiResponse(200, true, {}, "Project is Removed."));
+	} catch (error) {
+		throw new ApiError(
+			500,
+			false,
+			error.message || "Something went wrong while removing a project."
+		);
+	}
+});
+
+export { getProjects, addProject, removeProject };

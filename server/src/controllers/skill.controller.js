@@ -54,8 +54,8 @@ const removeSkill = asycHandler(async (req, res) => {
 		if (!skill_id) {
 			throw new ApiError(411, false, "Skill Id is missing.");
 		}
-		const removeSkill = await Skill.findByIdAndDelete(skill_id);
-		if (!removeSkill) {
+		const removeSkillInDB = await Skill.findByIdAndDelete(skill_id);
+		if (!removeSkillInDB) {
 			return res
 				.status(411)
 				.json(new ApiResponse(401, false, {}, "Skill is not Remove."));
