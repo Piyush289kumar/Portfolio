@@ -8,6 +8,7 @@ import {
 	signup,
 } from "../controllers/user.controller.js";
 import { verifyJWT } from "../middlewares/auth.middleware.js";
+import { addSkill, getSkills, removeSkill } from "../controllers/skill.controller.js";
 
 const router = Router();
 router.route("/signup").post(signup);
@@ -16,5 +17,11 @@ router.route("/logout").get(verifyJWT, logout);
 router.route("/get-user").get(getUserDetail);
 router.route("/get-admin").get(verifyJWT, getAuthUser);
 router.route("/refresh").post(renewRefreshToken);
+
+// Skill Routes
+
+router.route("/get-skill").get(getSkills);
+router.route("/add-skill").post(verifyJWT, addSkill);
+router.route("/remove-skill/:skill_id").delete(removeSkill);
 
 export default router;
