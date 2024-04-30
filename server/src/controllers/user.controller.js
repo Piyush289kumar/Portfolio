@@ -159,4 +159,58 @@ const getAuthUser = asycHandler(async (req, res) => {
 		);
 	}
 });
-export { signup, signin, logout, getUserDetail, getAuthUser };
+
+const renewRefreshToken = asycHandler(async (req, res) => {
+	try {
+		const prevToken = req.cookies.refreshToken || req.body.refreshToken;
+
+		if (!prevToken) {
+			throw new ApiError(401, false, "Token is missing");
+		}
+
+		const decode = Jwt.verify(prevToken, process.env.REFRESH_TOKEN_SECRET);
+
+		if (!decode) {
+			throw new ApiError(401, false, "Unable to decode Refresh Token");
+		}
+
+		const user = await User.findById(decode?._id);
+
+		if (!user) {
+			throw new ApiError(401, false, "Unable to get user data");
+		}
+
+		if (prevToken !== user?.refreshToken) {
+			throw new ApiError(401, false, "Refresh Token is Expired");
+		}
+
+		const { accessToken, newrefreshToken } =
+			await generateAccessAndRefreshToken(user?._id);
+
+		return res
+			.status(200)
+			.cookies("accessToken", accessToken, cookieOption)
+			.cookies("refreshToken", refreshToken, cookieOption)
+			.json(
+				new ApiResponse(200, true, {
+					accessToken: accessToken,
+					refreshToken: newrefreshToken,
+				})
+			);
+	} catch (error) {
+		throw new ApiError(
+			500,
+			false,
+			"Something went wrong while refreshToken"
+		);
+	}
+});
+
+export {
+	signup,
+	signin,
+	logout,
+	getUserDetail,
+	getAuthUser,
+	renewRefreshToken,
+};
