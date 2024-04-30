@@ -6,10 +6,16 @@ const getProjects = asycHandler(async (req, res) => {
 		const projects = await Project.find();
 
 		if (!projects) {
-			res.status(404).json(
-				new ApiResponse(404, false, {}, "Project Not Found.")
-			);
+			return res
+				.status(404)
+				.json(new ApiResponse(404, false, {}, "Project Not Found."));
 		}
+
+		return res
+			.status(200)
+			.json(
+				new ApiResponse(200, true, projects, "Project data is fetched.")
+			);
 	} catch (error) {
 		throw new ApiError(
 			500,
