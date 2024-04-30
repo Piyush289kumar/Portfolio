@@ -1,5 +1,5 @@
 import { createTransport } from "nodemailer";
-import { asycHandler } from "./asycHandler.util";
+import { asycHandler } from "./asycHandler.util.js";
 
 const sendEmail = asycHandler(async (emailsubject, emailBody) => {
 	const transport = createTransport({

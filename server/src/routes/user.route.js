@@ -19,6 +19,7 @@ import {
 	removeProject,
 	updateProject,
 } from "../controllers/project.controller.js";
+import { contact } from "../controllers/contact.controller.js";
 
 const router = Router();
 router.route("/signup").post(signup);
@@ -39,5 +40,9 @@ router.route("/get-project").get(getProjects);
 router.route("/add-project").post(verifyJWT, addProject);
 router.route("/update-project/:project_id").put(verifyJWT, updateProject);
 router.route("/delete-project/:project_id").delete(verifyJWT, removeProject);
+
+// Contact
+
+router.route("/contact").post(contact);
 
 export default router;
