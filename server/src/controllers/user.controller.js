@@ -10,11 +10,12 @@ const cookieOption = {
 };
 const generateAccessAndRefreshToken = async (userId) => {
 	try {
-		const fetchUserData = User.findById(userId);
-		const accessToken = fetchUserData.generateAccessToken();
-		const refreshToken = fetchUserData.generateRefreshToken();
+		const fetchUserData = await User.findById(userId);
+		const accessToken = await fetchUserData.generateAccessToken();
+		const refreshToken = await fetchUserData.generateRefreshToken();
 		fetchUserData.refreshToken = refreshToken;
 		await fetchUserData.save({ validateBeforeSave: false });
+
 		return { accessToken, refreshToken };
 	} catch (error) {
 		throw new ApiError(
@@ -70,24 +71,30 @@ const signup = asycHandler(async (req, res) => {
 const signin = asycHandler(async (req, res) => {
 	try {
 		const { email, username, password } = req.body;
+
 		if (!email && !username && !password) {
 			throw new ApiError(400, false, "Email or Username is Required");
 		}
 		const user = await User.findOne({ $or: [{ email }, { username }] });
+
 		if (!user) {
 			throw new ApiError(404, false, "Account Not Found...!");
 		}
 		const isPasswordCorrect = await user.isPasswordCorrect(password);
+
 		if (!isPasswordCorrect) {
 			throw new ApiError(401, false, "Invalid User Credentials");
 		}
-		const { accessToken, refreshToken } = generateAccessAndRefreshToken(
-			user._id
-		);
+		const { accessToken, refreshToken } =
+			await generateAccessAndRefreshToken(user._id);
+
 		const loggedUser = await User.findById(user._id).select(
-			"-password",
-			"-refreshToken"
+			"-password -refreshToken"
 		);
+
+		console.log(`loggedUser`);
+		console.log(loggedUser);
+
 		return res
 			.status(200)
 			.cookie("accessToken", accessToken, cookieOption)
