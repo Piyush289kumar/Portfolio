@@ -8,7 +8,16 @@ import {
 	signup,
 } from "../controllers/user.controller.js";
 import { verifyJWT } from "../middlewares/auth.middleware.js";
-import { addSkill, getSkills, removeSkill } from "../controllers/skill.controller.js";
+import {
+	addSkill,
+	getSkills,
+	removeSkill,
+} from "../controllers/skill.controller.js";
+import {
+	addProject,
+	getProjects,
+	removeProject,
+} from "../controllers/project.controller.js";
 
 const router = Router();
 router.route("/signup").post(signup);
@@ -23,5 +32,10 @@ router.route("/refresh").post(renewRefreshToken);
 router.route("/get-skill").get(getSkills);
 router.route("/add-skill").post(verifyJWT, addSkill);
 router.route("/remove-skill/:skill_id").delete(removeSkill);
+
+// Project Route
+router.route("/get-project").get(getProjects);
+router.route("/add-project").post(verifyJWT, addProject);
+router.route("/delete-project/:project_id").delete(verifyJWT, removeProject);
 
 export default router;
