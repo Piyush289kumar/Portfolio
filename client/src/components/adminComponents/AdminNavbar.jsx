@@ -13,7 +13,9 @@ function AdminNavbar() {
           </li>
         ))}
       </ul>
-      <button className="text-2xl px-2 py-1 text-center hover:bg-red-600 hover:bg-opacity-60 hover:shadow-lg rounded-2xl transition-all outline-none">Logout</button>
+      <button className="text-2xl px-2 py-1 text-center hover:bg-red-600 hover:bg-opacity-60 hover:shadow-lg rounded-2xl transition-all outline-none">
+        Logout
+      </button>
     </nav>
   );
 }
