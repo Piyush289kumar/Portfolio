@@ -2,6 +2,7 @@ import React from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { toggle } from "../../redux/Slice/navSlice";
+import { setPage } from "../../redux/Slice/pageSlice";
 function AdminNavbar() {
   const toggleNav = useSelector((state) => state.nav.toggleNav);
   const dispatch = useDispatch();
@@ -16,12 +17,32 @@ function AdminNavbar() {
         onClick={() => dispatch(toggle())}
       />
       <ul className="text-2xl flex justify-center flex-col lg:flex-row gap-3 lg:gap-2">
-        {["Create Project", "Create Skill", "All Project"].map((tab, idx) => (
+        {[
+          {
+            name: "All Project",
+            link: "AllProject",
+          },
+          {
+            name: "All Skill",
+            link: "AllSkill",
+          },
+          {
+            name: "Create Project",
+            link: "CreateProject",
+          },
+          {
+            name: "Create Skill",
+            link: "CreateSkill",
+          },
+        ].map((tab, idx) => (
           <li
             key={idx}
             className="text-center lg:text-start cursor-pointer hover:bg-purple-500 hover:bg-opacity-60 hover:shadow-lg px-2 py-1 transition-all outline-none rounded-2xl"
+            onClick={() => {
+              dispatch(setPage(tab.link));
+            }}
           >
-            {tab}
+            {tab.name}
           </li>
         ))}
       </ul>
