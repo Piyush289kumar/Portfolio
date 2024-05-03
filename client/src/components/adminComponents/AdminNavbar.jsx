@@ -2,14 +2,12 @@ import React from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { toggle } from "../../redux/Slice/navSlice";
-
 function AdminNavbar() {
   const toggleNav = useSelector((state) => state.nav.toggleNav);
-
   const dispatch = useDispatch();
   return (
     <nav
-      className={`bg-white bg-opacity-5 backdrop-blur-xl text-white w-screen z-10 rounded-xl lg:rounded-none fixed lg:static h-screen lg:h-fit flex flex-col lg:flex-row justify-evenly lg:justify-between border border-none lg:border-gray-500 py-10 lg:py-3 lg:px-20 lg:translate-x-0 ${
+      className={`bg-white bg-opacity-5 backdrop-blur-xl text-white w-screen z-10 rounded-xl lg:rounded-none fixed lg:static h-screen lg:h-fit flex flex-col lg:flex-row justify-evenly lg:justify-between border border-none lg:border-gray-500 py-10 lg:py-3 lg:px-20 lg:translate-x-0 transition delay-150  ease-in-out ${
         toggleNav ? "translate-x-0" : "-translate-x-full"
       }`}
     >
@@ -33,5 +31,4 @@ function AdminNavbar() {
     </nav>
   );
 }
-
 export default AdminNavbar;
