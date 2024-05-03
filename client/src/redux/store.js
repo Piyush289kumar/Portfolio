@@ -1,5 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
+import navSlice from "./Slice/NavSlice";
 
-const store = configureStore({});
+const store = configureStore({
+  reducer: {
+    nav: navSlice,
+  },
+});
 
-export { store };
+export default store;
