@@ -13,7 +13,6 @@ function CreateProject() {
     console.log(imgFile);
   }
 
-
   return (
     <div className="p-3 backdrop-blur-3xl rounded-md w-fit mx-auto mt-10">
       <h1 className="text-3xl lg:text-5xl text-white mb-7 px-3">
