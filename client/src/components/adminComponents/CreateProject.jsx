@@ -13,12 +13,18 @@ function CreateProject() {
     console.log(imgFile);
   }
 
+  const handleSubmitForm = (event) => {
+    event.preventDefault();
+    console.log(`Event: `);
+    console.log(event);
+  }
+
   return (
     <div className="p-3 backdrop-blur-3xl rounded-md w-fit mx-auto mt-10">
       <h1 className="text-3xl lg:text-5xl text-white mb-7 px-3">
         Create Project
       </h1>
-      <form className="flex flex-col gap-3">
+      <form className="flex flex-col gap-3" onSubmit={handleSubmitForm}>
         <input
           type="text"
           name="name"
