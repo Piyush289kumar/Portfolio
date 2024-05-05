@@ -1,7 +1,7 @@
 const uploadOnCloudinary = async (receivedImage) => {
   const formData = new FormData();
   formData.append("file", receivedImage);
-  formData.append("upload_presets", "mern-porfolio");
+  formData.append("upload_preset", "mern-porfolio");
   formData.append("api_key", "612657266681866");
 
   const res = await fetch(

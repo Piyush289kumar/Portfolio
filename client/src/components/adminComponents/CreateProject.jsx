@@ -33,6 +33,7 @@ function CreateProject() {
     try {
 
       const res = await axios.post('http://localhost:5001/api/v1/add-project/', {
+
         name: projectName,
         description: projectDes,
         githubLink: githubLink,
