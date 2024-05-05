@@ -1,6 +1,10 @@
 import React, { useState } from "react";
+import { uploadOnCloudinary } from "../../utils/cloudinary.utils";
+import axios from 'axios'
 
 function CreateProject() {
+
+
   const [projectName, setprojectName] = useState("");
   const [projectDes, setProjectDes] = useState("");
   const [projectImg, setProjectImg] = useState("");
@@ -13,12 +17,40 @@ function CreateProject() {
     console.log(imgFile);
   }
 
-  const handleSubmitForm = (event) => {
+  const handleSubmitForm = async (event) => {
     event.preventDefault();
 
-    if (!projectName || !projectDes || projectImg) {
+    if (!projectName && !projectDes && projectImg) {
       return console.log("Please Fill all the requird Fields");
     }
+
+    const uploadImg = await uploadOnCloudinary(projectImg)
+
+    if (!uploadImg) {
+      return console.log('Image not uploaded');
+    }
+
+    try {
+
+      const res = await axios.post('http://localhost:5001/api/v1/add-project/', {
+        name: projectName,
+        description: projectDes,
+        githubLink: githubLink,
+        hostedUrl: hostedLink,
+        secureUrl: uploadImg.secureUrl,
+        publicId: uploadImg.publicId,
+        deleteToken: uploadImg.deleteToken,
+      })
+      alert(res.data.message)
+      setprojectName('')
+      setProjectDes('')
+      setProjectImg('')
+      setGithubLink('')
+      setHostedLink('')
+    } catch (error) {
+      console.log(error.message || 'Form Error');
+    }
+
   }
 
   return (

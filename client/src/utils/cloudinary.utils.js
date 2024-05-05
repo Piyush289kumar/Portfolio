@@ -28,3 +28,5 @@ const uploadOnCloudinary = async (receivedImage) => {
   };
   return imageData;
 };
+
+export { uploadOnCloudinary };

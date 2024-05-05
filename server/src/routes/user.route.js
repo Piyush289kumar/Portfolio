@@ -37,7 +37,8 @@ router.route("/remove-skill/:skill_id").delete(removeSkill);
 
 // Project Route
 router.route("/get-project").get(getProjects);
-router.route("/add-project").post(verifyJWT, addProject);
+router.route("/add-project").post(addProject);
+// router.route("/add-project").post(verifyJWT, addProject);
 router.route("/update-project/:project_id").put(verifyJWT, updateProject);
 router.route("/delete-project/:project_id").delete(verifyJWT, removeProject);
 
