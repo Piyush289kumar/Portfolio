@@ -15,8 +15,10 @@ function CreateProject() {
 
   const handleSubmitForm = (event) => {
     event.preventDefault();
-    console.log(`Event: `);
-    console.log(event);
+
+    if (!projectName || !projectDes || projectImg) {
+      return console.log("Please Fill all the requird Fields");
+    }
   }
 
   return (
