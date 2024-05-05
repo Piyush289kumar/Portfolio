@@ -29,20 +29,20 @@ router.route("/get-user").get(getUserDetail);
 router.route("/get-admin").get(verifyJWT, getAuthUser);
 router.route("/refresh").post(renewRefreshToken);
 
-// Skill Routes
+Skill Routes
 
 router.route("/get-skill").get(getSkills);
 router.route("/add-skill").post(verifyJWT, addSkill);
 router.route("/remove-skill/:skill_id").delete(removeSkill);
 
-// Project Route
+Project Route
 router.route("/get-project").get(getProjects);
 router.route("/add-project").post(addProject);
-// router.route("/add-project").post(verifyJWT, addProject);
+router.route("/add-project").post(verifyJWT, addProject);
 router.route("/update-project/:project_id").put(verifyJWT, updateProject);
 router.route("/delete-project/:project_id").delete(verifyJWT, removeProject);
 
-// Contact
+Contact
 
 router.route("/contact").post(contact);
 
