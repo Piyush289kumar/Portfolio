@@ -32,7 +32,8 @@ router.route("/refresh").post(renewRefreshToken);
 // Skill Routes
 
 router.route("/get-skill").get(getSkills);
-router.route("/add-skill").post(verifyJWT, addSkill);
+// router.route("/add-skill").post(verifyJWT, addSkill);
+router.route("/add-skill").post(addSkill);
 router.route("/remove-skill/:skill_id").delete(removeSkill);
 
 // Project Route

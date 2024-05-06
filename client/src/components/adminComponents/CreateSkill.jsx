@@ -30,7 +30,8 @@ function CreateSkill() {
   };
 
   return (
-    <div className="p-3 backdrop-blur-3xl rounded-md w-fit max-auto mt-10">
+
+    <div className="backdrop-blur-3xl rounded-3xl w-fit mx-auto mt-10 p-10 border border-white shadow-2xl">
       {/* <h1>Env = {process.env.CORE_URL}</h1> */}
       <h1 className="text-3xl lg:text-5xl text-white mb-7 px-3">
         Create Skill
@@ -49,14 +50,14 @@ function CreateSkill() {
         />
 
         <input
-          type="number"
+          type="text"
           name="skillLevel"
           id="skillLevel"
           placeholder="Skill Level"
           required
           value={skillLevel}
           onChange={(event) => setSkillLevel(event.target.value)}
-          className="bg-transparent pax-3 py-2 border rounded-full w-full lg:w-[40vw] font-bold text-xl gradientText"
+          className="bg-transparent px-3 py-2 border rounded-full w-full lg:w-[40vw] font-bold text-xl gradientText"
         />
 
         <button

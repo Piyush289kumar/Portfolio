@@ -52,7 +52,7 @@ function CreateProject() {
   };
 
   return (
-    <div className="p-3 backdrop-blur-3xl rounded-md w-fit mx-auto mt-10">
+    <div className="backdrop-blur-3xl rounded-3xl w-fit mx-auto mt-10 p-10 border border-white shadow-2xl">
       <h1 className="text-3xl lg:text-5xl text-white mb-7 px-3">
         Create Project
       </h1>
