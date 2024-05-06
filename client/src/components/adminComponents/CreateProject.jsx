@@ -117,7 +117,7 @@ function CreateProject() {
           type="submit"
           className="bg-purple-500 px-3 py-2 border rounded-full mx-auto w-64 font-bold text-xl text-white"
         >
-          Create Project
+          Add Project
         </button>
       </form>
     </div>
