@@ -12,13 +12,12 @@ function CreateProject() {
   const handleImage = (receivedImgEvent) => {
     const imgFile = receivedImgEvent.target.files[0];
     setProjectImg(imgFile);
-    console.log(imgFile);
   };
 
   const handleSubmitForm = async (event) => {
     event.preventDefault();
 
-    if (!projectName && !projectDes && projectImg) {
+    if (!projectName && !projectDes && !projectImg) {
       return console.log("Please Fill all the requird Fields");
     }
 
