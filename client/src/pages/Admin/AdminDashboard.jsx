@@ -9,13 +9,10 @@ import {
 import { GiHamburgerMenu } from "react-icons/gi";
 import { toggle } from "../../redux/Slice/navSlice.js";
 import { useDispatch, useSelector } from "react-redux";
-
 function AdminDashboard() {
   const toggleNav = useSelector((state) => state.nav.toggleNav);
   const page = useSelector((state) => state.page.page);
-
   const dispatch = useDispatch();
-
   return (
     <>
       <AdminNavbar />
@@ -24,8 +21,7 @@ function AdminDashboard() {
         className={`fixed text-xl text-white top-5 right-5 z-10 cursor-pointer lg:hidden ${toggleNav ? "hidden z-0" : "block"
           }`}
       />
-
-      <div className="w-full h-screen">
+      <div className="w-full h-screen  lg:px-72">
         {(() => {
           switch (page) {
             case "AllProject":
@@ -34,15 +30,12 @@ function AdminDashboard() {
             case "AllSkill":
               return <AllSkill />;
               break;
-
             case "CreateProject":
               return <CreateProject />;
               break;
-
             case "CreateSkill":
               return <CreateSkill />;
               break;
-
             default:
               return <AllProject />;
           }
@@ -51,5 +44,4 @@ function AdminDashboard() {
     </>
   );
 }
-
 export default AdminDashboard;
