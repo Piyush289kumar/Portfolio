@@ -7,8 +7,7 @@
   font-family: "Gabarito", sans-serif;
 }
 body {
-  /* background-image: url("./assets/images/bg.jpg"); */
-  background-image: url("./assets/images/2.jpg");
+  background-image: url("./assets/images/bgNextjs.jpg");
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center;
