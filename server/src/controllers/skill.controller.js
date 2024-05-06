@@ -1,5 +1,6 @@
 import {Skill} from "../models/Skill.model.js";
 import  {ApiError, ApiResponse, asycHandler}  from "../utils/index.js";
+
 const getSkills = asycHandler(async (_, res) => {
 	try {
 		const skills = await Skill.find();

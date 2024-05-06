@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import { uploadOnCloudinary } from "../../utils/cloudinary.utils";
-import axios from 'axios'
+import axios from "axios";
 
 function CreateProject() {
-
-
   const [projectName, setprojectName] = useState("");
   const [projectDes, setProjectDes] = useState("");
   const [projectImg, setProjectImg] = useState("");
@@ -12,10 +10,10 @@ function CreateProject() {
   const [hostedLink, setHostedLink] = useState("");
 
   const handleImage = (receivedImgEvent) => {
-    const imgFile = receivedImgEvent.target.files[0]
-    setProjectImg(imgFile)
+    const imgFile = receivedImgEvent.target.files[0];
+    setProjectImg(imgFile);
     console.log(imgFile);
-  }
+  };
 
   const handleSubmitForm = async (event) => {
     event.preventDefault();
@@ -24,35 +22,35 @@ function CreateProject() {
       return console.log("Please Fill all the requird Fields");
     }
 
-    const uploadImg = await uploadOnCloudinary(projectImg)
+    const uploadImg = await uploadOnCloudinary(projectImg);
 
     if (!uploadImg) {
-      return console.log('Image not uploaded');
+      return console.log("Image not uploaded");
     }
 
     try {
-
-      const res = await axios.post('http://localhost:5001/api/v1/add-project/', {
-
-        name: projectName,
-        description: projectDes,
-        githubLink: githubLink,
-        hostedUrl: hostedLink,
-        secureUrl: uploadImg.secureUrl,
-        publicId: uploadImg.publicId,
-        deleteToken: uploadImg.deleteToken,
-      })
-      alert(res.data.message)
-      setprojectName('')
-      setProjectDes('')
-      setProjectImg('')
-      setGithubLink('')
-      setHostedLink('')
+      const res = await axios.post(
+        "http://localhost:5001/api/v1/add-project/",
+        {
+          name: projectName,
+          description: projectDes,
+          githubLink: githubLink,
+          hostedUrl: hostedLink,
+          secureUrl: uploadImg.secureUrl,
+          publicId: uploadImg.publicId,
+          deleteToken: uploadImg.deleteToken,
+        }
+      );
+      alert(res.data.message);
+      setprojectName("");
+      setProjectDes("");
+      setProjectImg("");
+      setGithubLink("");
+      setHostedLink("");
     } catch (error) {
-      console.log(error.message || 'Form Error');
+      console.log(error.message || "Form Error at Project Add Form");
     }
-
-  }
+  };
 
   return (
     <div className="p-3 backdrop-blur-3xl rounded-md w-fit mx-auto mt-10">
@@ -88,7 +86,14 @@ function CreateProject() {
           >
             Project Image:
           </label>
-          <input type="file" name="img" id="img" accept="image" required onChange={handleImage} />
+          <input
+            type="file"
+            name="img"
+            id="img"
+            accept="image"
+            required
+            onChange={handleImage}
+          />
         </div>
 
         <input
