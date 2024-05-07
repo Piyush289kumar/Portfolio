@@ -20,6 +20,7 @@ import {
 	updateProject,
 } from "../controllers/project.controller.js";
 import { contact } from "../controllers/contact.controller.js";
+import { generateSignature } from "../utils/generateSignature.utils.js";
 
 const router = Router();
 router.route("/signup").post(signup);
@@ -40,11 +41,15 @@ router.route("/remove-skill/:skill_id").delete(removeSkill);
 router.route("/get-project").get(getProjects);
 router.route("/add-project").post(addProject);
 //router.route("/add-project").post(verifyJWT, addProject);
-router.route("/update-project/:project_id").put(verifyJWT, updateProject);
-router.route("/delete-project/:project_id").delete(verifyJWT, removeProject);
+// router.route("/update-project/:project_id").put(verifyJWT, updateProject);
+router.route("/update-project/:project_id").put(updateProject);
+// router.route("/delete-project/:project_id").delete(verifyJWT, removeProject);
+router.route("/delete-project/:project_id").delete(removeProject);
 
 // Contact
-
 router.route("/contact").post(contact);
+
+// Signature
+router.route("/signature", generateSignature);
 
 export default router;

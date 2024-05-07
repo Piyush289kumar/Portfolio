@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setProject } from "../../redux/Slice/showCaseSlice";
 import { MdDelete, MdEdit } from "react-icons/md";
 import { TiTick } from "react-icons/ti";
+import { getSignature } from "../../utils/getSignature.utils";
 
 function AllProject() {
   const [edit, setEdit] = useState(false);
@@ -28,16 +29,24 @@ function AllProject() {
     dispatch(setProject(resData));
   };
 
+  const deleteProjectHandler = async (id, publicId) => {
+    alert("Are you sure you want to delete this project?");
+
+    const signature = await getSignature(publicId);
+    console.log(`Signature generate while Deleting : ${signature}`);
+  };
+  const updateProjectHandler = async (id, publicId) => {};
+
   useEffect(() => {
     getAllProject();
   }, []);
 
   return (
-    <div className="flex flex-col justify-center items-center gap-5 text-white lg:h-[80vh]">
+    <div className="flex flex-col justify-center items-center gap-5 text-white lg:h-auto">
       {allProject.map((project, idx) => (
         <div
           key={project._id}
-          className="flex flex-col border-2 w-[80vw] lg:w-[40vw] rounded-lg p-2 gap-3"
+          className="flex flex-col border-2 w-[80vw] rounded-lg p-2 gap-3"
         >
           <div className="flex flex-col lg:flex-row justify-between gap-5">
             <img
@@ -113,10 +122,92 @@ function AllProject() {
 
               <div>
                 <label htmlFor="githubLink">Github Link: </label>
-                <h1>
-                  {edit? true : false}
+                <h1
+                  className={`text-sm lg:text-base text-gray-300 ${
+                    edit &&
+                    selectedProject === project._id &&
+                    "bg-indigo-500 bg-opacity-30"
+                  }`}
+                >
+                  {edit ? (
+                    <input
+                      type="text"
+                      name="githubLink"
+                      id="githubLink"
+                      value={
+                        selectedProject === project._id
+                          ? updateProjectGithubLink
+                          : project.githubLink
+                      }
+                      onChange={(event) =>
+                        updateProjectGithubLink(event.target.value)
+                      }
+                      className="w-full bg-transparent"
+                    />
+                  ) : (
+                    project.githubLink
+                  )}
                 </h1>
               </div>
+
+              <div>
+                <label htmlFor="hostedLink">Hosted Link: </label>
+
+                <h1
+                  className={`text-sm lg:text-base text-gray-300 ${
+                    edit &&
+                    selectedProject === project._id &&
+                    "bg-indigo-500 bg-opacity-30"
+                  }`}
+                >
+                  {edit ? (
+                    <input
+                      type="text"
+                      name="hostedLink"
+                      id="hostedLink"
+                      value={
+                        selectedProject === project._id
+                          ? updateProjectHostedLink
+                          : project.hostedUrl
+                      }
+                      onChange={(event) =>
+                        setUpdateProjectHostedLink(event.target.value)
+                      }
+                    />
+                  ) : (
+                    project.hostedUrl
+                  )}
+                </h1>
+              </div>
+            </div>
+            <div className="flex lg:flex-col justify-between items-center rounded-lg gap-3 px-3 py-2 bg-indigo-500 bg-opacity-30 text-2xl">
+              <MdEdit
+                className={`hover:scale-150 transition-all delay-100 ease-linear cursor-pointer hover:text-red-500 ${
+                  edit && selectedProject === project._id ? "hidden" : "block"
+                }`}
+                onChange={() => {
+                  setEdit(!edit);
+                  setSelectedProject(project._id);
+                  setUpdateProjectName(project.name);
+                  setUpdateProjectDes(project.description);
+                  setUpdateProjectGithubLink(project.githubLink);
+                  setUpdateProjectHostedLink(project.hostedUrl);
+                }}
+              />
+              <TiTick
+                className={`text-lg hover:scale-150 transition-all ease-linear delay-100 cursor-pointer hover:text-red-500 ${
+                  edit && selectedProject === project._id ? "block" : "hidden"
+                }`}
+                onClick={() =>
+                  updateProjectHandler(project._id, project.publicId)
+                }
+              />
+              <MdDelete
+                className={`text-lg hover:scale-150 transition-all ease-linear delay-100 cursor-pointer hover:text-red-500`}
+                onClick={() =>
+                  deleteProjectHandler(project._id, project.publicId)
+                }
+              />
             </div>
           </div>
         </div>
