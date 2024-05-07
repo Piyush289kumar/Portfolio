@@ -18,8 +18,9 @@ function AdminDashboard() {
       <AdminNavbar />
       <GiHamburgerMenu
         onClick={() => dispatch(toggle())}
-        className={`fixed text-xl text-white top-5 right-5 z-10 cursor-pointer lg:hidden ${toggleNav ? "hidden z-0" : "block"
-          }`}
+        className={`fixed text-xl text-white top-5 right-5 z-10 cursor-pointer lg:hidden ${
+          toggleNav ? "hidden z-0" : "block"
+        }`}
       />
       <div className="w-full h-screen  lg:px-72">
         {(() => {

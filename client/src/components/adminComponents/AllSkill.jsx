@@ -17,7 +17,7 @@ function AllSkill() {
     );
     const data = await response.data;
     alert(data.message);
-    window.location.reload();
+    getAllSkills();
   };
   useEffect(() => {
     getAllSkills();
