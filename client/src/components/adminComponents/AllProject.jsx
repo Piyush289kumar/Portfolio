@@ -1,30 +1,26 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-
+import { setProject } from "../../redux/Slice/showCaseSlice";
 function AllProject() {
-  
-  const [AllProject, setAllProject] = useState([]);
-
+  const allProject = useSelector((state) => state.showcase.project);
+  const dispatch = useDispatch();
+  const getAllProject = async () => {
+    const response = await axios.get(
+      "http://localhost:5001/api/v1/get-project/"
+    );
+    const resData = await response.data.data;
+    dispatch(setProject(resData));
+  };
   useEffect(() => {
-    const getAllProject = async () => {
-      const response = await axios.get(
-        "http://localhost:5001/api/v1/get-project/"
-      );
-      const allProjectRes = response.data.data;
-
-      console.log("allProjectRes");
-      console.log(allProjectRes);
-      setAllProject(allProjectRes);
-
-      console.log(AllProject);
-    };
     getAllProject();
   }, []);
-
   return (
     <div>
-      {AllProject.map((project, idx) => (
-        <h1 key={idx}>{project.name}</h1>
+      {allProject.map((project, idx) => (
+        <h1 key={idx} className="text-white text-3xl">
+          {project.name}
+        </h1>
       ))}
     </div>
   );
