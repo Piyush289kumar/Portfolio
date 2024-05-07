@@ -7,7 +7,9 @@ import { TiTick } from "react-icons/ti";
 import { getSignature } from "../../utils/getSignature.utils.js";
 import { deleteImage } from "../../utils/deleteImage.utils.js";
 import { uploadOnCloudinary } from "../../utils/cloudinary.utils.js";
+
 function AllProject() {
+
   const [edit, setEdit] = useState(false);
   const [selectedProject, setSelectedProject] = useState("");
   const [updateProjectName, setUpdateProjectName] = useState("");
@@ -17,6 +19,7 @@ function AllProject() {
   const [updatedProjectImg, setUpdatedProjectImg] = useState("");
   const allProject = useSelector((state) => state.showcase.project);
   const dispatch = useDispatch();
+
   const getAllProject = async () => {
     const response = await axios.get(
       "http://localhost:5001/api/v1/get-project/"
@@ -68,9 +71,11 @@ function AllProject() {
     alert(data.message);
     getAllProject();
   };
+
   useEffect(() => {
     getAllProject();
   }, []);
+
   return (
     <div className="flex flex-col justify-center items-center gap-5 text-white lg:h-auto">
       {allProject.map((project, idx) => (
@@ -82,9 +87,8 @@ function AllProject() {
             <img
               src={project.img}
               alt={project.name}
-              className={`w-fit h-[180px] lg:w-[200px] lg:h-auto ${
-                edit && "hidden"
-              }`}
+              className={`w-fit h-[180px] lg:w-[200px] lg:h-auto ${edit && "hidden"
+                }`}
             />
             <input
               type="file"
@@ -96,11 +100,10 @@ function AllProject() {
             />
             <div className="flex flex-col gap-2">
               <h1
-                className={`text-xl lg:text-3xl ${
-                  edit &&
+                className={`text-xl lg:text-3xl ${edit &&
                   selectedProject === project._id &&
                   "bg-indigo-500 bg-opacity-30"
-                }`}
+                  }`}
               >
                 {edit ? (
                   <input
@@ -124,11 +127,10 @@ function AllProject() {
               <div>
                 <label htmlFor="des">Desc: </label>
                 <h1
-                  className={`text-sm lg:text-base text-gray-300 ${
-                    edit &&
+                  className={`text-sm lg:text-base text-gray-300 ${edit &&
                     selectedProject === project._id &&
                     "bg-indigo-500 bg-opacity-30"
-                  }`}
+                    }`}
                 >
                   {edit ? (
                     <input
@@ -153,11 +155,10 @@ function AllProject() {
               <div>
                 <label htmlFor="githubLink">Github Link: </label>
                 <h1
-                  className={`text-sm lg:text-base text-gray-300 ${
-                    edit &&
+                  className={`text-sm lg:text-base text-gray-300 ${edit &&
                     selectedProject === project._id &&
                     "bg-indigo-500 bg-opacity-30"
-                  }`}
+                    }`}
                 >
                   {edit ? (
                     <input
@@ -182,11 +183,10 @@ function AllProject() {
               <div>
                 <label htmlFor="hostedLink">Hosted Link: </label>
                 <h1
-                  className={`text-sm lg:text-base text-gray-300 ${
-                    edit &&
+                  className={`text-sm lg:text-base text-gray-300 ${edit &&
                     selectedProject === project._id &&
                     "bg-indigo-500 bg-opacity-30"
-                  }`}
+                    }`}
                 >
                   {edit ? (
                     <input
@@ -210,9 +210,8 @@ function AllProject() {
             </div>
             <div className="flex lg:flex-col justify-between items-center rounded-lg gap-3 px-3 py-2 bg-indigo-500 bg-opacity-30 text-2xl">
               <MdEdit
-                className={`hover:scale-150 transition-all delay-100 ease-linear cursor-pointer hover:text-red-500 ${
-                  edit && selectedProject === project._id ? "hidden" : "block"
-                }`}
+                className={`hover:scale-150 transition-all delay-100 ease-linear cursor-pointer hover:text-red-500 ${edit && selectedProject === project._id ? "hidden" : "block"
+                  }`}
                 onClick={() => {
                   setEdit(!edit);
                   setSelectedProject(project._id);
@@ -223,9 +222,8 @@ function AllProject() {
                 }}
               />
               <TiTick
-                className={`text-lg hover:scale-150 transition-all ease-linear delay-100 cursor-pointer hover:text-red-500 ${
-                  edit && selectedProject === project._id ? "block" : "hidden"
-                }`}
+                className={`text-lg hover:scale-150 transition-all ease-linear delay-100 cursor-pointer hover:text-red-500 ${edit && selectedProject === project._id ? "block" : "hidden"
+                  }`}
                 onClick={() =>
                   updateProjectHandler(project._id, project.publicId)
                 }
