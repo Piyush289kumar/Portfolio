@@ -73,7 +73,7 @@ function AllProject() {
     };
 
     const res = await axios.put(
-      `http://localhost:5001/api/v1/delete-project/${id}`,
+      `http://localhost:5001/api/v1/update-project/${id}`,
       updatedData
     );
     const data = await res.data;
