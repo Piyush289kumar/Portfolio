@@ -31,7 +31,7 @@ function AllProject() {
     dispatch(setProject(resData));
   };
 
-  const deleteProjectHandler = async (id, publicId) => {
+  const deleteProjectHandler = async (id) => {
     alert("Are you sure you want to delete this project?");
 
     // const signature = await getSignature(publicId);
@@ -53,7 +53,7 @@ function AllProject() {
     const file = e.target.files[0];
     setUpdatedProjectImg(file);
   };
-  const updateProjectHandler = async (id, publicId) => {
+  const updateProjectHandler = async (id) => {
     setEdit(false);
 
     let uploadImg;
