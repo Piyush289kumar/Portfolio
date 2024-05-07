@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { setProject } from "../../redux/Slice/showCaseSlice";
-import { MdDelete, MdEdit } from "react-icons/md";
+import { MdDelete, MdEdit, MdLeakRemove } from "react-icons/md";
 import { TiTick } from "react-icons/ti";
-import { getSignature } from "../../utils/getSignature.utils";
+import { getSignature } from "../../utils/getSignature.utils.js";
+import { deleteImage } from "../../utils/deleteImage.utils.js";
 
 function AllProject() {
   const [edit, setEdit] = useState(false);
@@ -32,8 +33,19 @@ function AllProject() {
   const deleteProjectHandler = async (id, publicId) => {
     alert("Are you sure you want to delete this project?");
 
-    const signature = await getSignature(publicId);
-    console.log(`Signature generate while Deleting : ${signature}`);
+    // const signature = await getSignature(publicId);
+    // console.log(`Signature generate while Deleting : ${signature}`);
+
+    // // Delete Image from cloudinary
+    // const newData = await deleteImage(publicId, signature);
+
+    // Delete Project from database
+    const deleteProject = await axios.delete(
+      `http://localhost:5001/api/v1/delete-project/${id}`
+    );
+    const dataRes = await deleteProject.data;
+    alert(dataRes.message);
+    getAllProject();
   };
   const updateProjectHandler = async (id, publicId) => {};
 
