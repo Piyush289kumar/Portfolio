@@ -6,6 +6,7 @@ import { MdDelete, MdEdit, MdLeakRemove } from "react-icons/md";
 import { TiTick } from "react-icons/ti";
 import { getSignature } from "../../utils/getSignature.utils.js";
 import { deleteImage } from "../../utils/deleteImage.utils.js";
+import { uploadOnCloudinary } from "../../utils/cloudinary.utils.js";
 
 function AllProject() {
   const [edit, setEdit] = useState(false);
@@ -47,7 +48,39 @@ function AllProject() {
     alert(dataRes.message);
     getAllProject();
   };
-  const updateProjectHandler = async (id, publicId) => {};
+
+  const handleImg = (e) => {
+    const file = e.target.files[0];
+    setUpdatedProjectImg(file);
+  };
+  const updateProjectHandler = async (id, publicId) => {
+    setEdit(false);
+
+    let uploadImg;
+    if (updatedProjectImg) {
+      uploadImg = await uploadOnCloudinary(updatedProjectImg);
+    }
+
+    const updatedData = {
+      id: id,
+      name: updateProjectName,
+      description: updateProjectDes,
+      githubLink: updateProjectGithubLink,
+      hostedUrl: updateProjectHostedLink,
+      publicId: uploadImg ? uploadImg.publicId : null,
+      deleteToken: uploadImg ? uploadImg.deleteToken : null,
+      img: uploadImg ? uploadImg.secureUrl : null,
+    };
+
+    const res = await axios.put(
+      `http://localhost:5001/api/v1/delete-project/${id}`,
+      updatedData
+    );
+    const data = await res.data;
+    alert(data.message);
+
+    getAllProject();
+  };
 
   useEffect(() => {
     getAllProject();
@@ -64,14 +97,17 @@ function AllProject() {
             <img
               src={project.img}
               alt={project.name}
-              className={`w-fit h-[180px] lg:w-[200px] lg:h-auto`}
+              className={`w-fit h-[180px] lg:w-[200px] lg:h-auto ${
+                edit && "hidden"
+              }`}
             />
             <input
               type="file"
               name="img"
               id="img"
               accept="img"
-              className={`${edit && "hidden"}`}
+              onChange={handleImg}
+              className={`${edit ? "block" : "hidden"}`}
             />
 
             <div className="flex flex-col gap-2">
@@ -88,7 +124,7 @@ function AllProject() {
                     name="name"
                     id="nmae"
                     value={
-                      selectedProject === project_.id
+                      selectedProject === project._id
                         ? updateProjectName
                         : project.name
                     }
@@ -152,7 +188,7 @@ function AllProject() {
                           : project.githubLink
                       }
                       onChange={(event) =>
-                        updateProjectGithubLink(event.target.value)
+                        setUpdateProjectGithubLink(event.target.value)
                       }
                       className="w-full bg-transparent"
                     />
@@ -197,7 +233,7 @@ function AllProject() {
                 className={`hover:scale-150 transition-all delay-100 ease-linear cursor-pointer hover:text-red-500 ${
                   edit && selectedProject === project._id ? "hidden" : "block"
                 }`}
-                onChange={() => {
+                onClick={() => {
                   setEdit(!edit);
                   setSelectedProject(project._id);
                   setUpdateProjectName(project.name);
