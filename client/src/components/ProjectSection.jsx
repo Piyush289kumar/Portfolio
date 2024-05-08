@@ -8,44 +8,6 @@ import axios from "axios";
 import { setProject } from "../redux/Slice/showCaseSlice";
 
 function ProjectSection() {
-  const projectData = [
-    {
-      title: "Project One",
-      src: "/src/assets/images/project.png",
-      GitHub: "GitHub",
-      LiveLink: "Live Link",
-    },
-    {
-      title: "Project Two",
-      src: "/src/assets/images/project.png",
-      GitHub: "GitHub",
-      LiveLink: "Live Link",
-    },
-    {
-      title: "Project Three",
-      src: "/src/assets/images/project.png",
-      GitHub: "GitHub",
-      LiveLink: "Live Link",
-    },
-    {
-      title: "Project Four",
-      src: "/src/assets/images/project.png",
-      GitHub: "GitHub",
-      LiveLink: "Live Link",
-    },
-    {
-      title: "Project Five",
-      src: "/src/assets/images/project.png",
-      GitHub: "GitHub",
-      LiveLink: "Live Link",
-    },
-    {
-      title: "Project Six",
-      src: "/src/assets/images/project.png",
-      GitHub: "GitHub",
-      LiveLink: "Live Link",
-    },
-  ];
   const scrollRef = useRef(null);
   const scrollRight = () => {
     scrollRef.current.scrollLeft += 500;
@@ -76,9 +38,9 @@ function ProjectSection() {
         ref={scrollRef}
         className="flex overflow-x-scroll gap-8 lg:p-3 scrollHide"
       >
-        {allProject.map((project, idx) => (
+        {allProject.map((project) => (
           <ProjectCard
-            key={idx}
+            key={project._id}
             title={project.name ? project.name : "404"}
             src={project.img ? project.img : "404"}
             GitHub={project.githubLink ? project.githubLink : "404"}
@@ -88,14 +50,14 @@ function ProjectSection() {
       </div>
       <div className="flex justify-center items-center gap-3 mt-2 select-none">
         <HiArrowSmLeft
-          className="text-xl lg:text-2xl cursor-pointer text-yellow-500 hidden lg:block"
+          className="text-xl lg:text-2xl cursor-pointer text-yellow-500 lg:block"
           onClick={scrollLeft}
         />
         <h2 className="font-mono uppercase gradientText text-lg">
           Slide for More
         </h2>
         <HiArrowSmRight
-          className="text-xl lg:text-2xl cursor-pointer text-yellow-500 hidden lg:block"
+          className="text-xl lg:text-2xl cursor-pointer text-yellow-500 lg:block"
           onClick={scrollRight}
         />
       </div>

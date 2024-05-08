@@ -22,8 +22,6 @@ function AllProject() {
       "http://localhost:5001/api/v1/get-project/"
     );
     const resData = await response.data.data;
-    console.log("resData");
-    console.log(resData);
     dispatch(setProject(resData));
   };
   const deleteProjectHandler = async (id) => {

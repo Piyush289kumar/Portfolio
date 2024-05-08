@@ -20,10 +20,10 @@ function ProjectCard({ title, src, GitHub, LiveLink }) {
               Laudantium natus delectus quisquam?
             </h1>
             <div className="flex items-center justify-between mt-2 pt-2 border-2 border-transparent border-t-gray-400">
-              <a href={GitHub}  target="_blank">
+              <a href={GitHub} target="_blank">
                 <AiFillGithub className="text-white font-bold inline-flex items-center text-2xl md:text-3xl md:mb-2 lg:mb-0 hover:text-sky-300 cursor-pointer" />
               </a>
-              <a href={LiveLink}  target="_blank">
+              <a href={LiveLink} target="_blank">
                 <RiSignalTowerFill className="text-white font-bold inline-flex items-center text-2xl md:text-3xl md:mb-2 lg:mb-0 hover:text-sky-300 cursor-pointer" />
               </a>
             </div>
