@@ -29,7 +29,7 @@ function CreateProject() {
 
     try {
       const res = await axios.post(
-        "http://localhost:5001/api/v1/add-project/",
+        `${import.meta.env.VITE_SERVER_URL}/add-project`,
         {
           name: projectName,
           description: projectDes,

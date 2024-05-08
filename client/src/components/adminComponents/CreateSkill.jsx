@@ -14,7 +14,7 @@ function CreateSkill() {
 
     try {
       const response = await axios.post(
-        "http://localhost:5001/api/v1/add-skill",
+        `${import.meta.env.VITE_SERVER_URL}/add-skill`,
         {
           skillName: skillName,
           skillLevel: skillLevel,

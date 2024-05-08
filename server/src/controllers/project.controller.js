@@ -129,7 +129,7 @@ const removeProject = asycHandler(async (req, res) => {
 			throw new ApiError(404, false, "Project Id is not found.");
 		}
 
-		const removeProjectInDB = await Project.findOneAndDelete(project_id);
+		const removeProjectInDB = await Project.findByIdAndDelete(project_id);
 
 		if (!removeProjectInDB) {
 			throw new ApiError(411, false, "Unable to Remove Project.");

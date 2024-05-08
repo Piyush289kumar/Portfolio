@@ -7,14 +7,14 @@ function AllSkill() {
   const allSkill = useSelector((state) => state.showcase.skill);
   const dispatch = useDispatch();
   const getAllSkills = async () => {
-    const response = await axios.get("http://localhost:5001/api/v1/get-skill/");
+    const response = await axios.get(`${import.meta.env.VITE_SERVER_URL}/get-skill`);
     const allSkillResponse = response.data.data;
 
     dispatch(setSkill(allSkillResponse.reverse()));
   };
   const handleRemoveSkill = async (receviedId) => {
     const response = await axios.delete(
-      `http://localhost:5001/api/v1/remove-skill/${receviedId}`
+      `${import.meta.env.VITE_SERVER_URL}/remove-skill/${receviedId}`
     );
     const data = await response.data;
     alert(data.message);

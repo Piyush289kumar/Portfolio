@@ -14,7 +14,7 @@ function SkillSection() {
   }, []);
 
   const getAllSkills = async () => {
-    const response = await axios.get("http://localhost:5001/api/v1/get-skill");
+    const response = await axios.get(`${import.meta.env.VITE_SERVER_URL}/get-skill`);
     const skillData = response.data.data.reverse();
     dispatch(setSkill(skillData));
   };

@@ -19,7 +19,7 @@ function AllProject() {
   const dispatch = useDispatch();
   const getAllProject = async () => {
     const response = await axios.get(
-      "http://localhost:5001/api/v1/get-project/"
+      `${import.meta.env.VITE_SERVER_URL}/get-project`
     );
     const resData = await response.data.data;
     dispatch(setProject(resData));
@@ -32,7 +32,7 @@ function AllProject() {
     // const newData = await deleteImage(publicId, signature);
     // Delete Project from database
     const deleteProject = await axios.delete(
-      `http://localhost:5001/api/v1/delete-project/${id}`
+      `${import.meta.env.VITE_SERVER_URL}/delete-project/${id}`
     );
     const dataRes = await deleteProject.data;
     alert(dataRes.message);
@@ -59,7 +59,7 @@ function AllProject() {
       img: uploadImg ? uploadImg.secureUrl : null,
     };
     const res = await axios.put(
-      `http://localhost:5001/api/v1/update-project/${id}`,
+      `${import.meta.env.VITE_SERVER_URL}/update-project/${id}`,
       updatedData
     );
     const data = await res.data;

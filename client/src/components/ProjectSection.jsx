@@ -20,7 +20,7 @@ function ProjectSection() {
   const dispatch = useDispatch();
 
   const dispatchAllProjectToStore = async () => {
-    const res = await axios.get("http://localhost:5001/api/v1/get-project");
+    const res = await axios.get(`${import.meta.env.VITE_SERVER_URL}/get-project`);
     const projectResData = res.data.data.reverse();
     dispatch(setProject(projectResData));
   };

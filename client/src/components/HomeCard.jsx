@@ -15,8 +15,9 @@ function HomeCard() {
         <p className="text-gray-300 text-xl lg:text-2xl text-justify">
           First of all, I want to introduce myself with my technical skills
           include multiple technologies like
-          <b> PHP, React Js, Express Js, Node Js, MySQL and MongoDB Database</b>.
-          Also, I have a good command of advance MS-Office and web technologies
+          <b> PHP, React Js, Express Js, Node Js, MySQL and MongoDB Database</b>
+          . Also, I have a good command of advance MS-Office and web
+          technologies
         </p>
         <p className="text-gray-300 text-xl lg:text-2xl text-justify">
           I'm committed to furthering my skills an achieving new milestones in
