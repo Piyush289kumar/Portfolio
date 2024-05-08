@@ -7,8 +7,8 @@ import {
   CreateSkill,
 } from "../../components/adminComponents/index.js";
 import { GiHamburgerMenu } from "react-icons/gi";
-import { toggle } from "../../redux/Slice/navSlice.js";
 import { useDispatch, useSelector } from "react-redux";
+import { toggle } from "../../redux/Slice/navSlice.js";
 function AdminDashboard() {
   const toggleNav = useSelector((state) => state.nav.toggleNav);
   const page = useSelector((state) => state.page.page);
