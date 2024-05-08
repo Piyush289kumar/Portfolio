@@ -1,15 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import SkillCard from "./SkillCard";
-const skillData = [
-  { technology: "PHP", value: "40" },
-  { technology: "MySQL", value: "25" },
-  { technology: "React Js", value: "20" },
-  { technology: "Node Js", value: "35" },
-  { technology: "Express Js", value: "25" },
-  { technology: "MongoDB", value: "20" },
-  { technology: "Corel Draw", value: "35" },
-];
+import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { setSkill } from "../redux/Slice/showCaseSlice";
+
+
 function SkillSection() {
+  const skillData = useSelector((state) => state.showcase.skill);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    getAllSkills();
+  }, []);
+
+  const getAllSkills = async () => {
+    const response = await axios.get("http://localhost:5001/api/v1/get-skill");
+    const skillData = response.data.data.reverse();
+    dispatch(setSkill(skillData));
+  };
+
   return (
     <div data-aos="zoom-in-up" className="mb-20 lg:mb-36">
       <h1 className="text-5xl lg:text-7xl gradientText mb-10">My Skills</h1>
@@ -17,8 +26,8 @@ function SkillSection() {
         {skillData.map((skill, idx) => (
           <SkillCard
             key={idx}
-            technology={skill.technology}
-            value={skill.value}
+            technology={skill.skillName}
+            value={skill.skillLevel}
           />
         ))}
       </div>
