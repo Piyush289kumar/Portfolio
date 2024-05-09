@@ -18,11 +18,14 @@ function AdminLogin() {
       dispatch(setLoginUserEmail(email));
       setEmail("");
       setPwd("");
+
+      console.log(`useLoggIn: ${useLoggIn}`);
     } else {
       dispatch(logout());
     }
     alert(res.data.message);
   };
+
   return (
     <div className="flex justify-center mx-auto py-32 lg:pt-36">
       <form
