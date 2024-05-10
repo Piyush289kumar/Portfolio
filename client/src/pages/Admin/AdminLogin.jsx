@@ -2,14 +2,19 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { login, logout, setLoginUserEmail } from "../../redux/Slice/authSlice";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+// axios.defaults.withCredentials = true;
 function AdminLogin() {
+  const navigate = useNavigate();
   const useLoggIn = useSelector((state) => state.auth.isLoggin);
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [pwd, setPwd] = useState("");
   const loginHandler = async (event) => {
     event.preventDefault();
-    const res = await axios.post(`${import.meta.env.VITE_SERVER_URL}/signin`, {
+    // const res = await axios.post(`${import.meta.env.VITE_SERVER_URL}/signin`, {
+    const res = await axios.post(`http://localhost:5001/api/v1/signin`, {
       email,
       password: pwd,
     });
@@ -18,13 +23,29 @@ function AdminLogin() {
       dispatch(setLoginUserEmail(email));
       setEmail("");
       setPwd("");
-
+      navigate("/admin");
       console.log(`useLoggIn: ${useLoggIn}`);
     } else {
       dispatch(logout());
     }
     alert(res.data.message);
   };
+
+  const checkUser = async () => {
+    const res = await axios.post("http://localhost:5001/api/v1/checkUser");
+    const data = await res.data;
+
+    if (data.success) {
+      dispatch(login());
+      navigate("/admin");
+    } else {
+      dispatch(logout());
+    }
+  };
+
+  useEffect(() => {
+    checkUser();
+  }, []);
 
   return (
     <div className="flex justify-center mx-auto py-32 lg:pt-36">

@@ -8,13 +8,20 @@ const fileLimit = "16kb";
 app.use(express.json({ limit: fileLimit }));
 app.use(express.urlencoded({ extended: true, limit: fileLimit }));
 app.use(express.static("public"));
-app.use(cors());
-app.use(cookieParser());
+
+app.use(
+	cors({
+		origin:'*',
+		credentials: true,
+	})
+);
 
 // Import Route
 import router from "./routes/user.route.js";
 
 // Roter Declearation
 app.use("/api/v1/", router);
+
+app.use(cookieParser());
 
 export { app };

@@ -21,6 +21,7 @@ import {
 } from "../controllers/project.controller.js";
 import { contact } from "../controllers/contact.controller.js";
 import { generateSignature } from "../utils/generateSignature.utils.js";
+import { checkUser } from "../middlewares/checkuser.middleware.js";
 
 const router = Router();
 router.route("/signup").post(signup);
@@ -29,6 +30,7 @@ router.route("/logout").get(verifyJWT, logout);
 router.route("/get-user").get(getUserDetail);
 router.route("/get-admin").get(verifyJWT, getAuthUser);
 router.route("/refresh").post(renewRefreshToken);
+router.route("/checkUser").post(checkUser);
 
 // Skill Routes
 

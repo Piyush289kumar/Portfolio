@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import { ApiError, ApiResponse, asycHandler } from "../utils";
+import { ApiError, ApiResponse, asycHandler } from "../utils/index.js";
 const checkUser = asycHandler(async (req, res, next) => {
 	try {
 		const { refreshToken } =
@@ -38,3 +38,5 @@ const checkUser = asycHandler(async (req, res, next) => {
 		);
 	}
 });
+
+export { checkUser };
