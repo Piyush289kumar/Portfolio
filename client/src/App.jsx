@@ -3,7 +3,6 @@ import AdminDashboard from "./pages/Admin/AdminDashboard.jsx";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import AdminLogin from "./pages/Admin/AdminLogin.jsx";
 import ProtectedRoutes from "./components/ProtectedRoutes.jsx";
-
 export default function App() {
   return (
     <BrowserRouter>
