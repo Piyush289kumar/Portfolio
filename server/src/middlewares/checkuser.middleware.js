@@ -38,5 +38,4 @@ const checkUser = asycHandler(async (req, res, next) => {
 		);
 	}
 });
-
 export { checkUser };
