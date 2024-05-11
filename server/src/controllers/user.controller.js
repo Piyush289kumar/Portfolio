@@ -88,6 +88,9 @@ const signin = asycHandler(async (req, res) => {
 		const { accessToken, refreshToken } =
 			await generateAccessAndRefreshToken(user._id);
 
+		console.log(`Return accessToken: ${accessToken}`);
+		console.log(`Return refreshToken: ${refreshToken}`);
+
 		const loggedUser = await User.findById(user._id).select(
 			"-password -refreshToken"
 		);
@@ -95,10 +98,15 @@ const signin = asycHandler(async (req, res) => {
 		console.log(`loggedUser`);
 		console.log(loggedUser);
 
+		const cookieOptions = {
+			httpOnly: true,
+			secure: false,
+		};
+
 		return res
 			.status(200)
-			.cookie("accessToken", accessToken, cookieOption)
-			.cookie("refreshToken", refreshToken, cookieOption)
+			.cookie("accessToken", accessToken, cookieOptions)
+			.cookie("refreshToken", refreshToken, cookieOptions)
 			.json(
 				new ApiResponse(
 					200,
