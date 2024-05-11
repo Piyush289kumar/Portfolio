@@ -8,13 +8,11 @@ const fileLimit = "16kb";
 app.use(express.json({ limit: fileLimit }));
 app.use(express.urlencoded({ extended: true, limit: fileLimit }));
 app.use(express.static("public"));
+const corsOptions = {
+	origin: "http://localhost:5173",
+};
 
-app.use(
-	cors({
-		origin:'*',
-		credentials: true,
-	})
-);
+app.use(cors(corsOptions));
 
 // Import Route
 import router from "./routes/user.route.js";
