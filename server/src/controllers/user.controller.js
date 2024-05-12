@@ -121,15 +121,15 @@ const signin = asycHandler(async (req, res) => {
 });
 const logout = asycHandler(async (req, res) => {
 	try {
-		await User.findByIdAndUpdate(
-			req.user._id,
-			{
-				$unset: {
-					refreshToken: "1",
-				},
-			},
-			{ new: true }
-		);
+		// await User.findByIdAndUpdate(
+		// 	req.user._id,
+		// 	{
+		// 		$unset: {
+		// 			refreshToken: "1",
+		// 		},
+		// 	},
+		// 	{ new: true }
+		// );
 		return res
 			.status(200)
 			.clearCookie("accessToken", cookieOption)
