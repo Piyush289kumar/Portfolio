@@ -3,13 +3,16 @@ import { AiOutlineClose } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { toggle } from "../../redux/Slice/navSlice";
 import { setPage } from "../../redux/Slice/pageSlice";
+import axios from "axios";
 function AdminNavbar() {
   const toggleNav = useSelector((state) => state.nav.toggleNav);
   const dispatch = useDispatch();
 
 
-  const logoutHandler = ()=>{
-    
+  const logoutHandler = async ()=>{
+    const response = await axios.get(
+      `${import.meta.env.VITE_SERVER_URL}/get-project`
+    );
   }
   return (
     <nav
