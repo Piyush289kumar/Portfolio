@@ -6,6 +6,11 @@ import { setPage } from "../../redux/Slice/pageSlice";
 function AdminNavbar() {
   const toggleNav = useSelector((state) => state.nav.toggleNav);
   const dispatch = useDispatch();
+
+
+  const logoutHandler = ()=>{
+    
+  }
   return (
     <nav
       className={`bg-white bg-opacity-5 backdrop-blur-xl text-white w-screen z-10 rounded-xl lg:rounded-none fixed lg:static h-screen lg:h-fit flex flex-col lg:flex-row justify-evenly lg:justify-between border border-none lg:border-gray-500 py-10 lg:py-3 lg:px-20 lg:translate-x-0 transition delay-150  ease-in-out ${toggleNav ? "translate-x-0" : "-translate-x-full"
@@ -46,7 +51,7 @@ function AdminNavbar() {
           </li>
         ))}
       </ul>
-      <button className="text-2xl px-2 py-1 text-center hover:bg-red-600 hover:bg-opacity-60 hover:shadow-lg rounded-2xl transition-all outline-none">
+      <button className="text-2xl px-2 py-1 text-center hover:bg-red-600 hover:bg-opacity-60 hover:shadow-lg rounded-2xl transition-all outline-none" onClick={logoutHandler}>
         Logout
       </button>
     </nav>
