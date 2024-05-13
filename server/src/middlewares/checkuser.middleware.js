@@ -2,7 +2,7 @@ import jwt from "jsonwebtoken";
 import { ApiError, ApiResponse, asycHandler } from "../utils/index.js";
 const checkUser = asycHandler(async (req, res, next) => {
 	try {
-		const { refreshToken } =
+		const { refreshToken } =	
 			req.cookies?.refreshToken || req.body?.refreshToken;
 		if (!refreshToken) {
 			return res
