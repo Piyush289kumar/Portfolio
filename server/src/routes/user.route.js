@@ -30,7 +30,7 @@ router.route("/logout").get(logout);
 router.route("/get-user").get(getUserDetail);
 router.route("/get-admin").get(verifyJWT, getAuthUser);
 router.route("/refresh").post(renewRefreshToken);
-router.route("http://localhost:5173/login").post(checkUser);
+router.route("/checkUser").post(checkUser);
 // Skill Routes
 router.route("/get-skill").get(getSkills);
 // router.route("/add-skill").post(verifyJWT, addSkill);
