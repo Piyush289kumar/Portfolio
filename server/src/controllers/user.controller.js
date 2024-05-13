@@ -11,8 +11,8 @@ const cookieOption = {
 const generateAccessAndRefreshToken = async (userId) => {
 	try {
 		const fetchUserData = await User.findById(userId);
-		const accessToken = await fetchUserData.generateAccessToken();
-		const refreshToken = await fetchUserData.generateRefreshToken();
+		const accessToken = await fetchUserData.generateAccessToken(userId);
+		const refreshToken = await fetchUserData.generateRefreshToken(userId);
 		fetchUserData.refreshToken = refreshToken;
 		await fetchUserData.save({ validateBeforeSave: false });
 
