@@ -13,8 +13,8 @@ function AdminLogin() {
   const [pwd, setPwd] = useState("");
   const loginHandler = async (event) => {
     event.preventDefault();
-    // const res = await axios.post(`${import.meta.env.VITE_SERVER_URL}/signin`, {
-    const res = await axios.post(`http://localhost:5001/api/v1/signin`, {
+    const res = await axios.post(`${import.meta.env.VITE_SERVER_URL}/signin`, {
+    // const res = await axios.post(`http://localhost:5001/api/v1/signin`, {
       email,
       password: pwd,
     });
