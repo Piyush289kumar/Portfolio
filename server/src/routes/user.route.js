@@ -33,8 +33,8 @@ router.route("/refresh").post(renewRefreshToken);
 router.route("/checkUser").post(checkUser);
 // Skill Routes
 router.route("/get-skill").get(getSkills);
-// router.route("/add-skill").post(verifyJWT, addSkill);
-router.route("/add-skill").post(addSkill);
+router.route("/add-skill").post(verifyJWT, addSkill);
+// router.route("/add-skill").post(addSkill);
 router.route("/remove-skill/:skill_id").delete(removeSkill);
 // Project Route
 router.route("/get-project").get(getProjects);
@@ -46,6 +46,7 @@ router.route("/update-project/:project_id").put(updateProject);
 router.route("/delete-project/:project_id").delete(removeProject);
 // Contact
 router.route("/contact").post(contact);
+
 // Signature
 router.route("/signature", generateSignature);
 export default router;
