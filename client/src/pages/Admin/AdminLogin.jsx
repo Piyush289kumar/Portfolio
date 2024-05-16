@@ -32,7 +32,7 @@ function AdminLogin() {
   };
 
   const checkUser = async () => {
-    const res = await axios.post("http://localhost:5001/api/v1/checkUser");
+    const res = await axios.post(`${import.meta.env.VITE_SERVER_URL}checkUser`);
     const data = await res.data;
 
     if (data.success) {
